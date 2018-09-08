@@ -1,0 +1,80 @@
+@font-face
+{
+    font-family: 'BebasNeueBold';
+    font-style: normal;
+    font-weight: bold;
+    src: url('../fonts/BebasNeueBold.ttf');
+}
+
+@font-face
+{
+    font-family: 'NetflixSans';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../fonts/NetflixSans-Regular-Opt.woff2');
+}
+
+html,
+body {
+    background: #111;
+    height: 100%;
+}
+
+body {
+    display: -ms-flexbox;
+    display: flex;
+    color: #fff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+
+    -webkit-transition: background-color 500ms ease-out 0.2s;
+    -moz-transition: background-color 500ms ease-out 0.2s;
+    -o-transition: background-color 500ms ease-out 0.2s;
+    transition: background-color 500ms ease-out 0.2s;
+}
+
+p {
+    font-size: 30px;
+}
+
+/*Header*/
+#logo {
+    color: #e50914;
+    font-family: 'BebasNeueBold';
+    font-size: 60px;
+}
+
+@media (min-width: 48em) {
+    .masthead-brand {
+      float: left;
+    }
+    .nav-masthead {
+      float: right;
+    }
+}
+
+/* Game */
+#covered-word {
+    font-size: 50px;
+    letter-spacing: 0.5em;
+    margin-bottom: 40px;
+}
+
+.letters-row {
+    margin-bottom: 10px;
+}
+
+.letter,
+.remaining-guesses-wrapper {
+    color: grey;
+    text-transform: uppercase;
+    border: 1px solid grey;
+    font-size: 12px;
+    padding: 4px;
+    font-family: 'Netflix Sans','Helvetica Neue',Helvetica,Arial,sans-serif
+}
+
+.letter {
+    width: 25px;
+    display: inline-block;
+}
