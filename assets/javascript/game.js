@@ -93,12 +93,16 @@ var game = {
 
     new: function () {
         this.currentWordOptionIndex = this.wordOptions.length;
+        this.started = true;
+
+        this.hideIntro();
+
         this.newMatch()
     },
 
     newMatch: function () {
         if (this.currentWordOptionIndex == this.wordOptions.length) {
-          this.randomizeWordOptions();
+            this.randomizeWordOptions();
         }
 
         var wordOption = this.wordOptions[this.currentWordOptionIndex++];
@@ -124,11 +128,11 @@ var game = {
         }
     },
 
-    randomizeWordOptions: function (){
-      this.currentWordOptionIndex = 0;
-      this.wordOptions = this.wordOptions.sort(function(a, b){
-        return 0.5 - Math.random()
-      });
+    randomizeWordOptions: function () {
+        this.currentWordOptionIndex = 0;
+        this.wordOptions = this.wordOptions.sort(function (a, b) {
+            return 0.5 - Math.random()
+        });
     },
 
     // Game UI methods
@@ -175,6 +179,7 @@ var game = {
     },
 
     hideLetter: function (letter) {
+        console.log(letter);
         var letterId = this.ui.letterClass + letter.toUpperCase();
 
         document.getElementById(letterId).classList.add(this.ui.playedLetterClass);
@@ -194,9 +199,14 @@ var game = {
     },
 
     handleMatchWon: function () {
+        document.getElementsByTagName("h6")[0].classList.remove("d-none");
         this.updateMatchesWonCounter();
         this.addImageToSlider();
         this.newMatch();
+    },
+
+    hideIntro: function () {
+        document.getElementsByTagName("body")[0].classList.remove("intro");
     },
 
     updateBodyClass: function (className) {

@@ -18,7 +18,7 @@
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
-<body class="text-center">
+<body class="text-center intro">
     <div class="d-flex w-100 h-100 mx-auto flex-column">
         <header class="masthead mb-auto">
             <div class="container-fluid pt-2">
@@ -34,6 +34,15 @@
             </div>
         </header>
         <main role="main" class="inner cover">
+            <section id="intro">
+                <div class="container-fluid">
+                    <h1>Guess movies and tv shows</h1>
+                    <p>Letter by letter until you find the answer</p>
+                    <button id="start-playing" class="btn">
+                        START PLAYING
+                    </button>
+                </div>
+            </section>
             <section id="game">
                 <div class="container-fluid">
                     <p>
@@ -108,14 +117,21 @@
     <script src="assets/javascript/game.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.8.6/min/tiny-slider.js"></script>
     <script>
-        game.new();
 
         document.onkeyup = function (event) {
-            var keyCode = event.keyCode;
+            if (game.started) {
+                var keyCode = event.keyCode;
 
-            if ((keyCode > 64 && keyCode < 91) || (keyCode > 96 && keyCode < 123) || keyCode === 8) {
-              game.guessLetter(event.key.toLowerCase());
+                if ((keyCode > 64 && keyCode < 91) || (keyCode > 96 && keyCode < 123) || keyCode === 8) {
+                    game.guessLetter(event.key.toLowerCase());
+                }
+            } else {
+                game.new();
             }
+        };
+
+        document.getElementById("start-playing").onclick = function (event) {
+            game.new();
         };
     </script>
 </body>
