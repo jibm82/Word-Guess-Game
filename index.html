@@ -1,15 +1,123 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-US">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Word guess</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Word Guess</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.8.6/tiny-slider.css">
+    <!--[if (lt IE 9)]><script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.8.6/min/tiny-slider.helper.ie8.js"></script><![endif]-->
+    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="text-center">
+    <div class="d-flex w-100 h-100 mx-auto flex-column">
+        <header class="masthead mb-auto">
+            <div class="container-fluid pt-2">
+                <h3 id="logo" class="masthead-brand">GuessFlix</h3>
+                <nav class="nav nav-masthead justify-content-center pt-sm-3">
+                    <span>
+                        <i class="fa fa-trophy"></i> <span id="matches-won">0</span>
+                    </span>
+                    <span>
+                        <div class="col"><i class="fa fa-skull"></i> <span id="matches-lost">0</span></div>
+                    </span>
+                </nav>
+            </div>
+        </header>
+        <main role="main" class="inner cover">
+            <section id="game">
+                <div class="container-fluid">
+                    <p>
+                        Press any letter to take a guess
+                    </p>
 
+                    <div>
+                        <h1 id="covered-word" class="d-inline-block"></h1>
+                    </div>
+
+                    <div class="letters-container">
+                        <div class="letters-row">
+                            <span id="letterQ" class="letter">q</span>
+                            <span id="letterW" class="letter">w</span>
+                            <span id="letterE" class="letter">e</span>
+                            <span id="letterR" class="letter">r</span>
+                            <span id="letterT" class="letter">t</span>
+                            <span id="letterY" class="letter">y</span>
+                            <span id="letterU" class="letter">u</span>
+                            <span id="letterI" class="letter">i</span>
+                            <span id="letterO" class="letter">o</span>
+                            <span id="letterP" class="letter">p</span>
+                        </div>
+                        <div class="letters-row">
+                            <span id="letterA" class="letter">a</span>
+                            <span id="letterS" class="letter">s</span>
+                            <span id="letterD" class="letter">d</span>
+                            <span id="letterF" class="letter">f</span>
+                            <span id="letterG" class="letter">g</span>
+                            <span id="letterH" class="letter">h</span>
+                            <span id="letterJ" class="letter">j</span>
+                            <span id="letterK" class="letter">k</span>
+                            <span id="letterL" class="letter">l</span>
+                        </div>
+                        <div class="letters-row">
+                            <span id="letterZ" class="letter">z</span>
+                            <span id="letterX" class="letter">x</span>
+                            <span id="letterC" class="letter">c</span>
+                            <span id="letterV" class="letter">v</span>
+                            <span id="letterB" class="letter">b</span>
+                            <span id="letterN" class="letter">n</span>
+                            <span id="letterM" class="letter">m</span>
+                        </div>
+
+                        <div class="remaining-guesses-wrapper d-inline-block">
+                            Remaining tries: <span id="remaining-guesses"></span>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="mastfoot mt-auto">
+            <div class="container-fluid text-left">
+                <h6 class="d-none">You already guessed</h6>
+                <div id="slider"></div>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="assets/javascript/game.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.8.6/min/tiny-slider.js"></script>
+    <script>
+        game.new();
+
+        document.onkeyup = function (event) {
+            var keyCode = event.keyCode;
+
+            if ((keyCode > 64 && keyCode < 91) || (keyCode > 96 && keyCode < 123) || keyCode === 8) {
+              game.guessLetter(event.key.toLowerCase());
+            }
+        };
+    </script>
 </body>
 
 </html>
